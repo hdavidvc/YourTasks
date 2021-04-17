@@ -1,0 +1,16 @@
+[{
+        "icon": "home-outline",
+        "name": "Inicio",
+        "redirecTo": "/home"
+    },
+    {
+        "icon": "clipboard-outline",
+        "name": "Pendientes",
+        "redirecTo": "/pendientes"
+    },
+    {
+        "icon": "checkmark-done-outline",
+        "name": "Terminadas",
+        "redirecTo": "/terminadas"
+    }
+]

@@ -1,0 +1,32 @@
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-list>
+
+    <ion-item-sliding *ngFor="let item of lista | filtroTerminado:terminada">
+
+        <ion-item detail (click)="listaSeleccionada(item)">
+            <ion-label>{{item.titulo}} </ion-label>
+            <!-- <ion-note slot="end">{{ item.items.length }} Items</ion-note> -->
+        </ion-item>
+
+        <ion-item-options side="start">
+            <ion-item-option (click)="agregarLista(item)" color="primary">
+                <ion-icon slot="icon-only" name='create'></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+
+        <ion-item-options side="end">
+            <ion-item-option (click)="borrar(item)" color="danger">
+                <ion-icon slot="icon-only" name='close'></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+
+
+    </ion-item-sliding>
+
+    <!-- <ion-button *ngIf="btncomplete.length === 0" expand="block">Crear nueva lista</ion-button> -->
+
+
+</ion-list>

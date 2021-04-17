@@ -1,5 +1,7 @@
 {
   "name": "YourTasks",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
