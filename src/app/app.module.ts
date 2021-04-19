@@ -12,6 +12,11 @@ import { firebaseConfig } from '../environments/environment.prod';
 // import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+// Plugins
+
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,7 +29,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     // AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, GooglePlus],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

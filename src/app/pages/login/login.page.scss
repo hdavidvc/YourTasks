@@ -18,6 +18,10 @@ ion-card-header {
 
 .redes {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 50px;
+}
+
+#google {
+    width: 40%;
 }

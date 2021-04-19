@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListaItem } from 'src/app/models/lista-item.model';
 import { Lista } from 'src/app/models/lista.models';
 import { DataService } from 'src/app/services/data.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-detalle-lista',
@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./detalle-lista.page.scss'],
 })
 export class DetalleListaPage implements OnInit {
-
+  @ViewChild(IonList) btn: IonList;
   lista: Lista;
   nombreitem = '';
 
@@ -127,5 +127,58 @@ export class DetalleListaPage implements OnInit {
     alert.present();
 
 
+  }
+
+  async editarTarea(lista, index) {
+    const alert = await this.alertControl.create({
+      header: 'Editar Tarea',
+      inputs: [
+        {
+          label: 'Nombre de la tarea',
+          name: 'tarea',
+          type: 'text',
+          value: lista.items[index].desc,
+          placeholder: 'Nombre de la tarea'
+        },
+        {
+          label: 'Fecha de finalizacion',
+          name: 'fecha',
+          type: 'date',
+          value: lista.items[index].fechaFin,
+          min: new Date().toISOString().split('T')[0],
+          max: '2025-01-12'
+        }
+      ],
+      buttons: [
+        {
+          text: 'cancelar',
+          role: 'cancel',
+          handler: () => {console.log('cancelado'); this.btn.closeSlidingItems();}
+        },
+        {
+          text: 'Editar',
+          handler: (data) => {
+            if (data.tarea.length === 0 && data.fecha.length === 0){
+              return;
+            }else{
+              const nuevoItem = new ListaItem(data.tarea, data.fecha);
+              lista.items[index].desc = data.tarea;
+              lista.items[index].fechaFin = data.fecha;
+              // this.nombreitem = '';
+
+              // tslint:disable-next-line: deprecation
+              this.dataServices.actualizarLista(lista).subscribe( d => {
+
+                console.log(this.lista);
+              });
+              this.btn.closeSlidingItems();
+            }
+
+          }
+        }
+    ]
+    });
+
+    alert.present();
   }
 }

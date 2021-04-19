@@ -7,7 +7,7 @@
 
                 <ion-buttons slot="end">
                     <ion-avatar routerLink='/login'>
-                        <img *ngIf="logeado" src="/assets/stan-lee.jpg" />
+                        <img *ngIf="logeado" [src]="img" />
                         <img *ngIf="!logeado" src="/assets/user_icon.png" />
                     </ion-avatar>
                 </ion-buttons>
@@ -36,6 +36,11 @@
 
 
         </ion-content>
+        <ion-footer>
+            <ion-toolbar>
+                <ion-title>{{nombre}}</ion-title>
+            </ion-toolbar>
+        </ion-footer>
 
     </ion-menu>
 

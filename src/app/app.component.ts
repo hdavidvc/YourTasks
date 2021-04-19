@@ -12,7 +12,8 @@ import { async } from '@angular/core/testing';
 })
 export class AppComponent implements OnInit {
   opts: Observable<Componente[]>;
-
+    nombre: string;
+    img: string;
     logeado: boolean;
 
    constructor(private dataservice: DataService, public menu: MenuController, private navCtrl: NavController) {
@@ -25,11 +26,21 @@ export class AppComponent implements OnInit {
       if (session){
         this.logeado = true;
         console.log('Estoy en el if', this.logeado);
+        if(session.displayName){
+          this.nombre = session.displayName;
+          this.img = session.photoURL;
+        }else {
+          this.nombre = session.email;          
+          this.img = '/assets/stan-lee.jpg';
+        }
       }
         else{
           this.logeado = false;
           console.log('Estoy en el else');
+          this.nombre = "";
         }
+
+        console.log(session);
     });
 
     console.log(this.logeado);

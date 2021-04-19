@@ -5,6 +5,9 @@ import { DataService } from '../../services/data.service';
 import { NavController } from '@ionic/angular';
 
 
+import { Platform } from '@ionic/angular';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -18,7 +21,8 @@ export class LoginPage implements OnInit {
   };
 messageErr: string;
 
-  constructor(private alertCtrl: AlertController, private dataService: DataService, private navCtrl: NavController) { }
+  constructor(private alertCtrl: AlertController, private dataService: DataService, private navCtrl: NavController,
+              private platform: Platform, private googlePlus: GooglePlus) { }
 
   ngOnInit() {
       this.dataService.getlistas();
@@ -57,4 +61,20 @@ messageErr: string;
     
   }
 
+  login(proveedor: string): any {
+
+    this.dataService.login(proveedor).then((user) => {
+            this.navCtrl.navigateRoot('/home');
+
+    });
+  }
+  loginGoogle() {
+    if (this.platform.is('android')) {
+      this.dataService.loginGoogleAndroid();
+      console.log("Soy android");
+
+    } else {
+      this.login('google');
+    }
+  }
 }
